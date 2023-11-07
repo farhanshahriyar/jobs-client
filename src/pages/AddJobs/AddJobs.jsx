@@ -14,6 +14,7 @@ const AddJobs = () => {
         const form = e.target;
         const banner = form.banner.value;
         const cname = form.cname.value;
+        const title = form.title.value;
         const uname = form.uname.value;
         const category = form.category.value;
         const salary = form.salary.value;
@@ -24,6 +25,7 @@ const AddJobs = () => {
         const newJob = {
             banner,
             cname,
+            title,
             uname,
             category,
             salary,
@@ -87,7 +89,7 @@ const AddJobs = () => {
                   Job Title
                 </label>
     
-                <input id="af-submit-app-project-name" type="text" name='jobTitle' className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="Enter Job Position Title. Example : Frontend Developer Intern"/>
+                <input id="af-submit-app-project-name" type="text" name='title' className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="Enter Job Position Title. Example : Frontend Developer Intern"/>
               </div>
 
               <div className="space-y-2">

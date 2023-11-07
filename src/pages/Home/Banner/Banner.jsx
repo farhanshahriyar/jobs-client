@@ -1,7 +1,20 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React, { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../providers/AuthProvider';
 
 const Banner = () => {
+  const [jobs, setJobs] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+
+    const searchHandler = (e) => {
+        e.preventDefault();
+        const filteredJobs = searchTerm
+    ? jobs.filter((job) => job.title.toLowerCase().includes(searchTerm.toLowerCase()))
+    : jobs;
+    navigate(`/all-jobs/${filteredJobs}`);
+    };
   return (
     <div>
 <div className="relative overflow-hidden">
@@ -34,9 +47,11 @@ const Banner = () => {
 
          {/* Search form section */}
          <div className="mt-10 max-w-2xl mx-auto">
-        <form
+        <form onSubmit={searchHandler}
           className="flex flex-col sm:flex-row gap-y-6 sm:gap-x-4 items-center">
-          <input
+          <input 
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
             type="text"
             placeholder="search your dream job"
             maxLength="256"

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const tabs = [
   { name: 'Onsite Job', id: 'onsite-job' },
@@ -9,19 +9,50 @@ const tabs = [
   { name: 'All Jobs', id: 'all-jobs' },
 ];
 
-// Dummy data for job listings
-const jobData = {
-  'onsite-job': ['Onsite Job 1', 'Onsite Job 2'],
-  'remote': ['Remote Job 1', 'Remote Job 2'],
-  'hybrid': ['Hybrid Job 1', 'Hybrid Job 2'],
-  'part-time': ['Part-Time Job 1', 'Part-Time Job 2'],
-};
-
-// get all jobs from jobData object
-jobData['all-jobs'] = Object.values(jobData).flat();
 
 const BrowseJobs = () => {
   const [activeTab, setActiveTab] = useState(tabs[0].id);
+  const [jobData, setJobData] = useState({
+    'onsite-job': [],
+    'remote': [],
+    'hybrid': [],
+    'part-time': [],
+    'all-jobs': [],
+  });
+
+  // Function to fetch job data
+  const fetchJobs = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/jobs/');
+      const data = await response.json();
+
+      // Organize data into an object with keys for each tab
+      const organizedData = data.reduce((acc, job) => {
+        // each job has a 'type' field which matches the ids in your tabs
+        if (acc[job.type]) {
+          acc[job.type].push(job);
+        }
+        // 'all-jobs' will accumulate all jobs
+        acc['all-jobs'].push(job);
+        return acc;
+      }, {
+        'onsite-job': [],
+        'remote': [],
+        'hybrid': [],
+        'part-time': [],
+        'all-jobs': [],
+      });
+
+      setJobData(organizedData);
+    } catch (error) {
+      console.error('Failed to fetch jobs:', error);
+    }
+  };
+
+  // useEffect to fetch job data when component 
+  useEffect(() => {
+    fetchJobs();
+  }, []);
 
   return (
     <div className='mt-[110px]'>
@@ -47,7 +78,7 @@ const BrowseJobs = () => {
         </nav>
       </div>
 
-      <div className="mt-3 p-4">
+<div className="mt-3 p-4">
         {tabs.map((tab) => (
           <div
             key={tab.id}
@@ -56,13 +87,25 @@ const BrowseJobs = () => {
             aria-labelledby={tab.id}
             className={`${activeTab === tab.id ? 'block' : 'hidden'}`}
           >
-            <ul className="text-gray-500 dark:text-gray-400">
-              {jobData[tab.id].map((job, index) => (
-                <li key={index} className="font-semibold text-gray-800 dark:text-gray-200">
-                  {job}
-                </li>
-              ))}
-            </ul>
+          <ul className="text-gray-500 dark:text-gray-400">
+  {jobData[tab.id].map((job, index) => (
+    <li key={index} className="mb-4 p-2 border rounded-md font-semibold text-gray-800 dark:text-gray-200">
+      <h3 className="text-lg">{job.cname} - {job.title}</h3>
+      <p>Posted by: {job.uname}</p>
+      <p>Posting Date: {job.date}</p>
+      <p>Application Deadline: {job.deadline || 'N/A'}</p>
+      <p>Salary Range: {job.salary}</p>
+      <p>Job Applicants: {job.applicants || 'N/A'}</p>
+      <button
+        type="button"
+        className="mt-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+      >
+        View Details
+      </button>
+    </li>
+  ))}
+</ul>
+
           </div>
         ))}
       </div>

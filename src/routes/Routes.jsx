@@ -8,6 +8,7 @@ import Careers from "../pages/Careers/Careers";
 import Contact from "../pages/Contact/Contact";
 import AddJobs from "../pages/AddJobs/AddJobs";
 import MyJobs from "../pages/MyJobs/MyJobs";
+import AllJobs from "../pages/AllJobs/AllJobs";
 // import Error from "../pages/Error/Error";
 
 
@@ -52,6 +53,11 @@ const router = createBrowserRouter([
         {
           path: "/my-jobs",
           element: <MyJobs/>,
+          // loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`).then(res => res.json()),
+        },
+        {
+          path: "/all-jobs",
+          element: <AllJobs/>,
         }
       ],
     },

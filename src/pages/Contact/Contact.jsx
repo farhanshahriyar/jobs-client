@@ -52,7 +52,6 @@ const Contact = () => {
           }
       })
   
-  
       // clear the form
       form.reset()
       }
