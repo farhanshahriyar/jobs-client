@@ -7,6 +7,7 @@ import AboutUs from "../pages/AboutUs/AboutUs";
 import Careers from "../pages/Careers/Careers";
 import Contact from "../pages/Contact/Contact";
 import AddJobs from "../pages/AddJobs/AddJobs";
+import MyJobs from "../pages/MyJobs/MyJobs";
 // import Error from "../pages/Error/Error";
 
 
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
         {
           path: "/add-jobs",
           element: <AddJobs/>,
+        },
+        {
+          path: "/my-jobs",
+          element: <MyJobs/>,
         }
       ],
     },

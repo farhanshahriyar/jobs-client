@@ -42,10 +42,10 @@ const AddJobs = () => {
       .then(data => {
           console.log(data)
           if(data.insertedId){
-              // alert('Coffee added successfully')
+              // alert('New Job added successfully')
               Swal.fire({
                 title: 'Success!',
-                text: 'Coffee added successfully',
+                text: 'New Job added successfully',
                 icon: 'success',
                 confirmButtonText: 'Done'
               })
@@ -62,7 +62,7 @@ const AddJobs = () => {
   
   
       // clear the form
-      // form.reset()
+      form.reset()
       }
   
   return (

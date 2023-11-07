@@ -1,7 +1,61 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
+import Swal from 'sweetalert2';
 
 const Contact = () => {
+  const contactHandler = (e) => {
+    e.preventDefault();
+    // console.log("Contact e click porse mama");
+        // get all data from the form
+        const form = e.target;
+        const firstname = form.firstname.value;
+        const lastname = form.lastname.value;
+        const email = form.email.value;
+        const phone = form.phone.value;
+        const details = form.details.value;
+
+        // passing info
+        const newContact = {
+          firstname,
+          lastname,
+          email,
+          phone,
+          details
+        }
+        // console.log(newContact) //data passing successfully
+        fetch('http://localhost:5000/contacts',{
+          method: 'POST',
+          headers: {
+              'content-type': 'application/json'
+          },
+          body: JSON.stringify(newContact)
+      })
+      .then(res => res.json())
+      .then(data => {
+          console.log(data)
+          if(data.insertedId){
+              // alert('Contact added successfully')
+              Swal.fire({
+                title: 'Success!',
+                text: 'Contact added successfully',
+                icon: 'success',
+                confirmButtonText: 'Done'
+              })
+          } else {
+              // alert('Something went wrong')
+              Swal.fire({
+                title: 'Error!',
+                text: 'Do you want to continue',
+                icon: 'error',
+                confirmButtonText: 'Back'
+              })
+          }
+      })
+  
+  
+      // clear the form
+      form.reset()
+      }
   return (
 <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
   <div className="max-w-2xl lg:max-w-5xl mx-auto">
@@ -21,35 +75,35 @@ const Contact = () => {
           Fill in the form
         </h2>
 
-        <form>
+        <form onSubmit={contactHandler}>
           <div className="grid gap-4">
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="sr-only">First Name</label>
-                <input type="text" name="hs-firstname-contacts-1" id="hs-firstname-contacts-1" className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="First Name"/>
+                <input type="text" name="firstname" id="hs-firstname-contacts-1" className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="First Name"/>
               </div>
 
               <div>
                 <label className="sr-only">Last Name</label>
-                <input type="text" name="hs-lastname-contacts-1" id="hs-lastname-contacts-1" className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="Last Name"/>
+                <input type="text" name="lastname" id="hs-lastname-contacts-1" className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="Last Name"/>
               </div>
             </div>
 
 
             <div>
               <label  className="sr-only">Email</label>
-              <input type="email" name="hs-email-contacts-1" id="hs-email-contacts-1" autoComplete="email" className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="Email"/>
+              <input type="email" name="email" id="hs-email-contacts-1" autoComplete="email" className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="Email"/>
             </div>
 
             <div>
               <label className="sr-only">Phone Number</label>
-              <input type="text" name="hs-phone-number-1" id="hs-phone-number-1" className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="Phone Number"/>
+              <input type="text" name="phone" id="hs-phone-number-1" className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="Phone Number"/>
             </div>
 
             <div>
               <label className="sr-only">Details</label>
-              <textarea id="hs-about-contacts-1" name="hs-about-contacts-1" rows="4" className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="Details"></textarea>
+              <textarea id="hs-about-contacts-1" name="details" rows="4" className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="Tell us about your issues"></textarea>
             </div>
           </div>
 
