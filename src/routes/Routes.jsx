@@ -6,6 +6,7 @@ import Register from "../pages/Register/Register";
 import AboutUs from "../pages/AboutUs/AboutUs";
 import Careers from "../pages/Careers/Careers";
 import Contact from "../pages/Contact/Contact";
+import AddJobs from "../pages/AddJobs/AddJobs";
 // import Error from "../pages/Error/Error";
 
 
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
         {
           path: "/contact",
           element: <Contact/>
+        }, 
+        {
+          path: "/add-jobs",
+          element: <AddJobs/>,
         }
       ],
     },

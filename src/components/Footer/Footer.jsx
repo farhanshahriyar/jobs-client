@@ -29,7 +29,7 @@ const Footer = () => {
         <div className="mt-3 grid space-y-3">
           <p><a className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200" href="#">About us</a></p>
           <p><a className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200" href="#">Blog</a></p>
-          <p><a className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200" href="#">Careers</a> <span className="inline ml-1 text-xs bg-blue-700 text-white py-1 px-2 rounded-md">Were hiring</span></p>
+          <p><a className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200" href="#">Careers</a> <span className="inline ml-1 text-xs bg-blue-700 text-white py-1 px-2 rounded-md">Not Available</span></p>
           <p><a className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200" href="#">Customers</a></p>
         </div>
       </div>
