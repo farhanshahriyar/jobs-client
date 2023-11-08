@@ -9,7 +9,7 @@ import Contact from "../pages/Contact/Contact";
 import AddJobs from "../pages/AddJobs/AddJobs";
 import MyJobs from "../pages/MyJobs/MyJobs";
 import AllJobs from "../pages/AllJobs/AllJobs";
-// import Error from "../pages/Error/Error";
+import Error from "../pages/Error/Error";
 
 
 const router = createBrowserRouter([
@@ -21,6 +21,10 @@ const router = createBrowserRouter([
         {
           path: "/",
           element: <Home/>,
+        },
+        {
+          path: "*",
+          element: <Error/>,
         },
         {
           path: "/about-us",

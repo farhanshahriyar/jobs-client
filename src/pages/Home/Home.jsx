@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React, { useState } from 'react'
 import Banner from './Banner/Banner'
 import About from './AboutUs/About'
 import BrowseJobs from './BrowseJobs/BrowseJobs'

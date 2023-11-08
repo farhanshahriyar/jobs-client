@@ -1,8 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import {  useNavigate } from 'react-router-dom'; // assuming react-router is being used
+import Error from '../Error/Error';
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 
 const AllJobs = () => {
+  const [error, setError] = useState(false);
   const [jobs, setJobs] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
@@ -40,44 +43,11 @@ const AllJobs = () => {
   };
 
   return (
-//     <div>
-//       <input
-//         type="text"
-//         placeholder="Search by job title..."
-//         value={searchTerm}
-//         onChange={(e) => setSearchTerm(e.target.value)}
-//       />
-//       <table>
-//         <thead>
-//           <tr>
-//             <th>Poster Name</th>
-//             <th>Job Title</th>
-//             <th>Posting Date</th>
-//             <th>Application Deadline</th>
-//             <th>Salary Range</th>
-//             <th>Details</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {filteredJobs.map((job) => (
-//             <tr key={job.id}>
-//               <td>{job.posterName}</td>
-//               <td>{job.title}</td>
-//               <td>{job.postingDate}</td>
-//               <td>{job.applicationDeadline}</td>
-//               <td>{job.salaryRange}</td>
-//               <td>
-//                 <button onClick={() => handleDetailsClick(job.id)}>View Details</button>
-//               </td>
-//             </tr>
-//           ))}
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-// };
+  // show error page if no data found
+  error ? <Error/> :
+  // show loading if data is not loaded
+  !jobs.length ? <LoadingSpinner/> :
 
-// export default AllJobs;
 
 <div className="max-w-[85rem] mx-auto px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
         <h2 className="text-3xl font-extrabold text-gray-900 text-center mb-3">All Jobs</h2>

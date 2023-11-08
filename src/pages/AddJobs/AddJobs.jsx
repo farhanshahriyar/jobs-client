@@ -68,7 +68,6 @@ const AddJobs = () => {
       }
   
   return (
-
     <div className="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
       <form onSubmit={jobPostHandler}>
         <div className="bg-white rounded-xl shadow dark:bg-slate-900">
@@ -115,7 +114,7 @@ const AddJobs = () => {
     
                 <select name='category' id="af-submit-app-category" className="py-2 px-3 pe-9 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
                   <option selected>Select a Job Category</option>
-                  <option>On Site</option>
+                  <option>On-Site</option>
                   <option>Remote</option>
                   <option>Part-Time</option>
                   <option>Hybrid</option>
