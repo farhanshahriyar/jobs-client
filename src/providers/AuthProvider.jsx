@@ -24,7 +24,6 @@ const AuthProvider = ({children}) => {
 
     // logout functionalities
     const logoutUser = async () => {
-        setLoading(true)
         return signOut(auth)
     }
 
@@ -33,7 +32,7 @@ const AuthProvider = ({children}) => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser)
             setLoading(false)
-            console.log('current user', currentUser)
+            // console.log('current user', currentUser)
             setLoading(false)
         }); 
         return () => {
@@ -46,6 +45,7 @@ const AuthProvider = ({children}) => {
         loading,
         createUser,
         loginUser,
+        logoutUser
     }
 
   return (

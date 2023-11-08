@@ -10,13 +10,14 @@ import AddJobs from "../pages/AddJobs/AddJobs";
 import MyJobs from "../pages/MyJobs/MyJobs";
 import AllJobs from "../pages/AllJobs/AllJobs";
 import Error from "../pages/Error/Error";
+import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
 
 
 const router = createBrowserRouter([
     {
       path: "/",
       element: <Main/>,
-    //   errorElement: <Error/>,
+      errorElement: <Error/>,
       children: [
         {
           path: "/",
@@ -30,10 +31,6 @@ const router = createBrowserRouter([
           path: "/about-us",
           element: <AboutUs/>,
         },
-        // {
-        //     path: "/error",
-        //     element: <Error/>
-        // }
         {
           path: "/login",
           element: <Login/>,
@@ -52,7 +49,11 @@ const router = createBrowserRouter([
         }, 
         {
           path: "/add-jobs",
-          element: <AddJobs/>,
+          // element: <AddJobs/>,
+          element:
+            <ProtectedRoute>
+              <AddJobs></AddJobs>
+            </ProtectedRoute>
         },
         {
           path: "/my-jobs",
