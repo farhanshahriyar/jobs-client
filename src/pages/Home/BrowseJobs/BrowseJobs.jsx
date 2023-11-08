@@ -241,24 +241,24 @@ const BrowseJobs = () => {
             aria-labelledby={tab.id}
             className={`${activeTab === tab.id ? 'block' : 'hidden'}`}
           >
-          <ul className="text-gray-500 dark:text-gray-400">
+          <div className="grid lg:grid-cols-2 gap-6">
             {jobData[tab.id].map((job, index) => (
-              <li key={index} className="mb-4 p-2 border rounded-md font-semibold text-gray-800 dark:text-gray-200">
-              <h3 className="text-lg">{job.cname} - {job.title}</h3>
-              <p>Posted by: {job.uname}</p>
-              <p>Posting Date: {job.date}</p>
+              <div key={index} className="group relative block rounded-xl bg-white shadow-lg p-6">
+              <p className='font-semibold text-gray-800'>{job.uname} posted a job</p>
+              <h3 className="text-lg font-semibold">{job.cname} - {job.title}</h3>
+              <p className='text-sm text-gray-600'>Posting Date: {job.date}</p>
               <p>Application Deadline: {job.deadline || 'N/A'}</p>
-              <p>Salary Range: {job.salary}</p>
-              <p>Job Applicants: {job.applicants || 'N/A'}</p>
+              <p className='text-sm text-gray-600'>Salary Range: {job.salary}</p>
+              <p className='text-sm text-gray-600'>Job Applicants: {job.applicants || 'N/A'}</p>
               <button
                 type="button"
-                className="mt-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                className="mt-4 w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
               >
                 View Details
               </button>
-            </li>
+            </div>
             ))}
-          </ul>
+          </div>
           </div>
         ))}
       </div>
