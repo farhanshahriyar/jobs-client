@@ -146,7 +146,7 @@ NestJS is a framework for building efficient, reliable, and scalable server-side
 store them on the client-side?
           </h3>
           <p className="mt-2 text-white/[.8]">
-          An access token is a type of credential that is issued by an authorization server to a client, granting permission to access a protected resource. It typically represents the user's consent to share specific data with an application or service.
+          An access token is a type of credential that is issued by an authorization server to a client, granting permission to access a protected resource. 
 
           </p>
         </div>
