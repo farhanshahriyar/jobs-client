@@ -11,7 +11,7 @@ const MyJob = () => {
         const confirmation = window.confirm("Are you sure you want to delete this job?");
         if (confirmation) {
           try {
-            const response = await fetch(`https://server-ewpifyj7q-farhanshahriyar.vercel.app/jobs/${jobId}`, {
+            const response = await fetch(`https://server-6pwgmkhex-farhanshahriyar.vercel.app/jobs/${jobId}`, {
               method: 'DELETE',
             });
       
@@ -35,7 +35,7 @@ const MyJob = () => {
         // Fetching job data from the backend
         const fetchMyJobs = async () => {
           try {
-            const response = await fetch('https://server-ewpifyj7q-farhanshahriyar.vercel.app/appliedjobs'); // Fetch data from the backend
+            const response = await fetch('https://server-6pwgmkhex-farhanshahriyar.vercel.app/appliedjobs'); // Fetch data from the backend
             if (!response.ok) {
               throw new Error(`HTTP error! status: ${response.status}`);
             }

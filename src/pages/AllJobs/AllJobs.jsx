@@ -13,7 +13,7 @@ const AllJobs = () => {
   useEffect(() => {
     // fetching job data from the backend
     const fetchJobs = async () => {
-      const response = await fetch('https://server-ewpifyj7q-farhanshahriyar.vercel.app/jobs/'); 
+      const response = await fetch('https://server-6pwgmkhex-farhanshahriyar.vercel.app/jobs/'); 
       const data = await response.json();
       setJobs(data);
      

@@ -6,7 +6,7 @@
 //   const [blogs, setBlogs] = useState([])
 
 //   useEffect(() => {
-//     fetch("https://server-ewpifyj7q-farhanshahriyar.vercel.app/blogs")
+//     fetch("https://server-6pwgmkhex-farhanshahriyar.vercel.app/blogs")
 //       .then(res => res.json())
 //       .then(data => setBlogs(data))
 //       .catch(err => console.log(err)) 

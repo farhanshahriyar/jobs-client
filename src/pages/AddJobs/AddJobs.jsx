@@ -41,7 +41,7 @@ const AddJobs = () => {
             applicationNumber: 0,
         }
         // console.log(newJob) //data passing successfully
-        fetch('https://server-ewpifyj7q-farhanshahriyar.vercel.app/jobs',{
+        fetch('https://server-6pwgmkhex-farhanshahriyar.vercel.app/jobs',{
           method: 'POST',
           headers: {
               'content-type': 'application/json'

@@ -60,7 +60,7 @@ const UpdateJob = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     // try {
-    //   const response = await fetch(`https://server-ewpifyj7q-farhanshahriyar.vercel.app/jobs/${id}`, {
+    //   const response = await fetch(`https://server-6pwgmkhex-farhanshahriyar.vercel.app/jobs/${id}`, {
     //     method: 'PUT',
     //     headers: {
     //       'Content-Type': 'application/json',
