@@ -11,10 +11,31 @@ const Login = () => {
   const navigate = useNavigate();
   const [registerError, setRegisterError] = useState(''); 
   const [user, setUser] = useState(null)
-  const {loginUser} = useContext(AuthContext)
+  const {loginUser, googleSignIn} = useContext(AuthContext)
 
   const handleGoogleSignIn = () => {
-   
+    googleSignIn()
+    .then((result) => {
+      // console.log(result.user)
+      const user = result.user;
+      Swal.fire({
+        icon: 'success',
+        title: 'Login Successful',
+        text: 'You are logged in successfully!',
+      });
+      navigate('/')
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // console.log(errorCode, errorMessage)
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: errorMessage,
+      });
+      setRegisterError(error.message);
+    });
   }
 
   const loginHandler = (e) => {

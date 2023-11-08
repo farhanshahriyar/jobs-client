@@ -11,6 +11,7 @@ import MyJobs from "../pages/MyJobs/MyJobs";
 import AllJobs from "../pages/AllJobs/AllJobs";
 import Error from "../pages/Error/Error";
 import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
+import JobDetails from "../pages/Home/BrowseJobs/SingleJobs/JobDetails";
 
 
 const router = createBrowserRouter([
@@ -48,6 +49,13 @@ const router = createBrowserRouter([
           element: <Contact/>
         }, 
         {
+          path: "/jobs/:id",
+          element: <ProtectedRoute>
+            <JobDetails/>
+          </ProtectedRoute>,
+          loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`).then(res => res.json()),
+        },
+        {
           path: "/add-jobs",
           // element: <AddJobs/>,
           element:
@@ -60,6 +68,11 @@ const router = createBrowserRouter([
           element: <MyJobs/>,
           // loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`).then(res => res.json()),
         },
+        // {
+        //   path: "/applied-jobs",
+        //   element: <App/>,
+        //   // loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`).then(res => res.json()),
+        // },
         {
           path: "/all-jobs",
           element: <AllJobs/>,

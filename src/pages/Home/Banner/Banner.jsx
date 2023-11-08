@@ -16,8 +16,8 @@ const Banner = () => {
     navigate(`/all-jobs/${filteredJobs}`);
     };
   return (
-    <div>
-<div className="relative overflow-hidden">
+    <div className='z-[5]'>
+<div className="relative overflow-hidden mt-8">
 
   <div aria-hidden="true" className="flex absolute -top-96 start-1/2 transform -translate-x-1/2">
     <div className="bg-gradient-to-r from-violet-300/50 to-purple-100 blur-3xl w-[25rem] h-[44rem] rotate-[-60deg] transform -translate-x-[10rem] dark:from-violet-900/50 dark:to-purple-900"></div>

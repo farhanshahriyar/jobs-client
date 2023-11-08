@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React, { createContext, useEffect, useState } from 'react'
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from '../firebase/firebase.config';
 
-export const AuthContext = createContext();
+export const AuthContext = createContext({});
 const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
@@ -21,6 +22,22 @@ const AuthProvider = ({children}) => {
         setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
+
+    // 
+    const googleSignIn = async () => {
+        setLoading(true)
+        return signInWithPopup(auth, googleProvider)
+    }
+
+    // 
+    const updateUser = async (name, image) => {
+        setLoading(true)
+        return updateProfile(auth.currentUser,{
+            displayName: name,
+            photoURL: image
+        })
+    }
+
 
     // logout functionalities
     const logoutUser = async () => {
@@ -45,7 +62,9 @@ const AuthProvider = ({children}) => {
         loading,
         createUser,
         loginUser,
-        logoutUser
+        logoutUser,
+        googleSignIn,
+        updateUser
     }
 
   return (

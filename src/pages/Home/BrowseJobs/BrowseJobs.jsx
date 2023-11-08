@@ -150,6 +150,7 @@
 
 import React, { useEffect, useState } from 'react';
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
+import { Link } from 'react-router-dom';
 
 const tabs = [
   { name: 'On-Site', id: 'onsite-job' },
@@ -250,12 +251,14 @@ const BrowseJobs = () => {
               <p>Application Deadline: {job.deadline || 'N/A'}</p>
               <p className='text-sm text-gray-600'>Salary Range: {job.salary}</p>
               <p className='text-sm text-gray-600'>Job Applicants: {job.applicants || 'N/A'}</p>
+              <Link to={`/jobs/${job._id}`} className="">
               <button
                 type="button"
                 className="mt-4 w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
               >
                 View Details
               </button>
+              </Link>
             </div>
             ))}
           </div>

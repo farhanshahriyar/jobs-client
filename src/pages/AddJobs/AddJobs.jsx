@@ -1,11 +1,14 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../../providers/AuthProvider';
 
 const AddJobs = () => {
     const [postingDate, setPostingDate] = useState(new Date());
+    const [dates, setDates] = useState(new Date());
+    const { user } = useContext(AuthContext);
 
     const jobPostHandler = (e) => {
         e.preventDefault();
@@ -16,10 +19,12 @@ const AddJobs = () => {
         const cname = form.cname.value;
         const title = form.title.value;
         const uname = form.uname.value;
+        const email = form.email.value;
         const category = form.category.value;
         const salary = form.salary.value;
         const description = form.description.value;
         const date = form.date.value;
+        const postingDate = dates;
 
         // passing info
         const newJob = {
@@ -27,10 +32,13 @@ const AddJobs = () => {
             cname,
             title,
             uname,
+            email,
             category,
             salary,
             description,
-            date
+            date,
+            postingDate,
+            applicationNumber: 0,
         }
         // console.log(newJob) //data passing successfully
         fetch('http://localhost:5000/jobs',{
@@ -96,7 +104,7 @@ const AddJobs = () => {
                   Company Name
                 </label>
     
-                <input id="af-submit-app-project-name" type="text" name='cname' className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="Company logo link"/>
+                <input id="af-submit-app-project-name" type="text" name='cname' className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="Company Name"/>
               </div>
     
               <div className="space-y-2">
@@ -104,7 +112,15 @@ const AddJobs = () => {
                    Logged in username
                 </label>
     
-                <input id="af-submit-project-url" type="text" name='uname' className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="Logged User. Example : MD.FARHAN SHAHRIYAR"/>
+                <input id="af-submit-project-url" readOnly disabled type="text" name='uname' value={user.displayName}  className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="Logged User. Example : MD.FARHAN SHAHRIYAR"/>
+              </div>
+    
+              <div className="space-y-2">
+                <label className="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-gray-200">
+                   Logged in useremail
+                </label>
+    
+                <input id="af-submit-project-url" readOnly disabled type="text" value={user.email} name='email' className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="Logged User. Example : MD.FARHAN SHAHRIYAR"/>
               </div>
     
               <div className="space-y-2">
@@ -139,7 +155,7 @@ const AddJobs = () => {
 
               <div className="space-y-2">
                 <label className="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-gray-200">
-                    Job Posting Date
+                    Job Application Deadline
                 </label>
                 <DatePicker
                     name='date'

@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
-import {  useNavigate } from 'react-router-dom'; // assuming react-router is being used
+import {  Link, useNavigate } from 'react-router-dom'; // assuming react-router is being used
 import Error from '../Error/Error';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 
@@ -76,14 +76,16 @@ const AllJobs = () => {
         {jobs.filter(
           (job) => job.title.toLowerCase().includes(searchTerm.toLowerCase())
         ).map((job, index) => (
+          <Link to={`/jobs/${job._id}`} key={index} className="group relative block rounded-xl bg-white shadow-lg p-6">
           <div key={index} className="group relative block rounded-xl bg-white shadow-lg p-6">
             <div className="flex flex-col">
               <h4 className="font-semibold text-gray-800">{job.uname} posted a job</h4>
               <h3 className="text-lg font-semibold"> {job.title}</h3>
-              <p className="text-sm text-gray-600">Posted on: {job.date}</p>
+              <p className="text-sm text-gray-600">Posted on: {job.postingDate.split('T')[0]}</p>
               <p className="text-sm text-gray-600">Category: {job.category}</p>
               <p className="text-sm text-gray-600">Salary: {job.salary}</p>
-              <p className="text-sm text-gray-600">Apply by: {job.applicationDeadline}</p>
+              <p className="text-sm text-gray-600">Deadline: {job.date}</p>
+              <p className="text-sm text-gray-600">Applicants: {job.applicationNumber}</p>
               <button
                 onClick={() => viewDetails(job.id)}
                 className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
@@ -92,6 +94,7 @@ const AllJobs = () => {
               </button>
             </div>
           </div>
+          </Link>
         ))}
       </div>
     </div>
