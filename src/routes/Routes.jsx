@@ -7,11 +7,13 @@ import AboutUs from "../pages/AboutUs/AboutUs";
 import Careers from "../pages/Careers/Careers";
 import Contact from "../pages/Contact/Contact";
 import AddJobs from "../pages/AddJobs/AddJobs";
-import MyJobs from "../pages/MyJobs/MyJobs";
+// import MyJobs from "../pages/MyJobs/MyJobs";
 import AllJobs from "../pages/AllJobs/AllJobs";
 import Error from "../pages/Error/Error";
 import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
 import JobDetails from "../pages/Home/BrowseJobs/SingleJobs/JobDetails";
+import MyJob from "../pages/MyJobs/MyJob";
+import AppliedJobs from "../pages/AppliedJobs/AppliedJobs";
 
 
 const router = createBrowserRouter([
@@ -63,11 +65,11 @@ const router = createBrowserRouter([
               <AddJobs></AddJobs>
             </ProtectedRoute>
         },
-        {
-          path: "/my-jobs",
-          element: <MyJobs/>,
-          // loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`).then(res => res.json()),
-        },
+        // {
+        //   path: "/my-jobs",
+        //   element: <MyJobs/>,
+        //   loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`).then(res => res.json()),
+        // },
         // {
         //   path: "/applied-jobs",
         //   element: <App/>,
@@ -76,6 +78,19 @@ const router = createBrowserRouter([
         {
           path: "/all-jobs",
           element: <AllJobs/>,
+        },
+        {
+          path: "/my-jobs",
+          element: <ProtectedRoute>
+            <MyJob/>
+          </ProtectedRoute>,
+         
+        },
+        {
+          path: "/applied-jobs",
+          element: <ProtectedRoute>
+            <AppliedJobs/>
+          </ProtectedRoute>,
         }
       ],
     },

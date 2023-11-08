@@ -2,22 +2,9 @@
 import React from 'react'
 import { useLoaderData } from 'react-router-dom'
 
-const MyJobs = ({jobs}) => {
-    // const jobs = useLoaderData();
-    const {
-        _id,
-        banner,
-        cname,
-        uname,
-        title,
-        category,
-        salary,
-        date
-    } = jobs;
-
-
-
-
+const MyJobs = () => {
+    const job = useLoaderData()
+    console.log(job)
   return (
     <div className='mt-5 '>
         <h2 className="text-2xl font-semibold leading-tight text-center">My Jobs</h2>
@@ -42,14 +29,14 @@ const MyJobs = ({jobs}) => {
                     </thead>
                     <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                         <tr>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{_id}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{cname}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{title}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{uname}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{category}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{salary}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{date}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{banner}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{job._id}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{job.cname}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{job.title}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{job.uname}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{job.category}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{job.salary}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{job.date}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{job.banner}</td>
                         <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
                             <button type="button" className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">Delete</button>
                         </td>
