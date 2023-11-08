@@ -5,6 +5,54 @@ import React, { useEffect, useState } from 'react'
 const MyJob = () => {
     const [myjobs, setMyJobs] = useState([]);
 
+    
+
+    // const handleDelete = async (jobId) => {
+    //     const confirmation = window.confirm("Are you sure you want to delete this job?");
+    //     if (confirmation) {
+    //         try {
+    //             const response = await fetch(`http://localhost:5000/jobs/${jobId}`, {
+    //                 method: 'DELETE',
+    //             });
+    
+    //             if (!response.ok) {
+    //                 throw new Error(`Error: ${response.status}`);
+    //             }
+    
+    //             const result = await response.json();
+    //             console.log('Delete result:', result);
+    
+    //             // Remove the job from the list in the frontend
+    //             setMyJobs(currentJobs => currentJobs.filter(job => job._id !== jobId));
+    //         } catch (error) {
+    //             console.error("Failed to delete the job:", error);
+    //         }
+    //     }
+    // }
+    const handleDelete = async (jobId) => {
+        const confirmation = window.confirm("Are you sure you want to delete this job?");
+        if (confirmation) {
+          try {
+            const response = await fetch(`http://localhost:5000/jobs/${jobId}`, {
+              method: 'DELETE',
+            });
+      
+            if (!response.ok) {
+              throw new Error(`Error: ${response.status}`);
+            }
+      
+            // Remove the job from the list in the frontend
+            setMyJobs(currentJobs => currentJobs.filter(job => job._id.toString() !== jobId));
+      
+            console.log('Job deleted successfully');
+          } catch (error) {
+            console.error("Failed to delete the job:", error);
+          }
+        }
+      };
+      
+    
+
     useEffect(() => {
         // Fetching job data from the backend
         const fetchMyJobs = async () => {
@@ -22,6 +70,7 @@ const MyJob = () => {
     
         fetchMyJobs();
       }, []);
+
 
     return (
     <div className='mt-5 '>
@@ -53,7 +102,8 @@ const MyJob = () => {
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{job.category}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{job.date}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                        <button type="button" className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">Delete</button>
+                        <button onClick={() => handleDelete(job._id)}
+                         type="button" className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">Delete</button>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
                         <button type="button" className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">Update</button>

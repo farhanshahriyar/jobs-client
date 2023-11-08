@@ -2,11 +2,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import logoHead from '../../assets/images/logo.svg'
 // import Swal from 'sweetalert2';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 // import Error from '../../pages/Error/Error';
 const Header = () => {
-  // const [error, setError] = useState(false);
+  const { pathname } = useLocation();
+  const isActive = (path) => pathname === path;
   const { user, logoutUser } = useContext(AuthContext);
   // console.log(logout)
   console.log(user)
@@ -37,16 +38,51 @@ const Header = () => {
     </div>
     <div id="navbar-collapse-with-animation" className="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow md:block">
       <div className="flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:items-center md:justify-end md:gap-y-0 md:gap-x-7 md:mt-0 md:pl-7">
-        <a className="font-medium text-blue-600 md:py-6 dark:text-blue-500" href="/" aria-current="page">Home</a>
-        <a className="font-medium text-gray-500 hover:text-gray-400 md:py-6 dark:text-gray-400 dark:hover:text-gray-500" href="/about-us">About Us</a>
-        <a className="font-medium text-gray-500 hover:text-gray-400 md:py-6 dark:text-gray-400 dark:hover:text-gray-500" href="/all-jobs">All Jobs</a>
-        <a className="font-medium text-gray-500 hover:text-gray-400 md:py-6 dark:text-gray-400 dark:hover:text-gray-500" href="/blogs">Blogs</a>
-        <a className="font-medium text-gray-500 hover:text-gray-400 md:py-6 dark:text-gray-400 dark:hover:text-gray-500" href="/contact">Contact</a>
-        <a className="font-medium text-gray-500 hover:text-gray-400 md:py-6 dark:text-gray-400 dark:hover:text-gray-500" href="/careers">Careers</a>
-        {/* <a className="font-medium text-gray-500 hover:text-gray-400 md:py-6 dark:text-gray-400 dark:hover:text-gray-500" href="/add-jobs">Add Jobs</a> */}
-        
-
-    
+        <Link
+          to="/"
+          className={`font-medium md:py-6 ${
+            isActive('/') ? 'text-blue-600 dark:text-blue-500' : 'text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500'
+          }`}
+        >
+          Home
+        </Link>
+        <Link
+            to="/about-us"
+            className={`font-medium md:py-6 
+              ${isActive('/about-us') ? 'text-blue-600 dark:text-blue-500' : 'text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500'
+            }`}
+          >
+            About Us
+          </Link>
+          <Link to="/all-jobs"
+            className={`font-medium md:py-6
+              ${isActive('/all-jobs') ? 'text-blue-600 dark:text-blue-500' : 'text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500'
+            }`}
+          >
+            All Jobs
+          </Link>
+          <Link to="/blogs"
+            className={`font-medium md:py-6
+              ${isActive('/blogs') ? 'text-blue-600 dark:text-blue-500' : 'text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500'
+            }`}
+          >
+            Blogs
+          </Link>
+          <Link to="/contact"
+            className={`font-medium md:py-6
+              ${isActive('/contact') ? 'text-blue-600 dark:text-blue-500' : 'text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500'
+            }`}
+          >
+            Contact
+          </Link>
+          <Link to="/careers"
+            className={`font-medium md:py-6
+              ${isActive('/careers') ? 'text-blue-600 dark:text-blue-500' : 'text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500'
+            }`}
+          >
+            Careers
+          </Link>
+      
       {/* condition */}
         {
           user && (
