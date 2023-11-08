@@ -244,13 +244,17 @@ const BrowseJobs = () => {
           >
           <div className="grid lg:grid-cols-2 gap-6">
             {jobData[tab.id].map((job, index) => (
+              // no jobs found
+              // job.length === 0 ? <p>No jobs found</p> :
+              // show jobs
+
               <div key={index} className="group relative block rounded-xl bg-white shadow-lg p-6">
               <p className='font-semibold text-gray-800'>{job.uname} posted a job</p>
               <h3 className="text-lg font-semibold">{job.cname} - {job.title}</h3>
-              <p className='text-sm text-gray-600'>Posting Date: {job.date}</p>
-              <p>Application Deadline: {job.deadline || 'N/A'}</p>
+              <p className="text-sm text-gray-600">Posted on: {job.postingDate.split('T')[0]}</p>
+              <p className='text-sm text-gray-600'>Application Deadline: {job.date}</p>
               <p className='text-sm text-gray-600'>Salary Range: {job.salary}</p>
-              <p className='text-sm text-gray-600'>Job Applicants: {job.applicants || 'N/A'}</p>
+              <p className='text-sm text-gray-600'>Job Applicants: {job.applicationNumber}</p>
               <Link to={`/jobs/${job._id}`} className="">
               <button
                 type="button"
