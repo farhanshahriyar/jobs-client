@@ -15,6 +15,7 @@ import JobDetails from "../pages/Home/BrowseJobs/SingleJobs/JobDetails";
 import MyJob from "../pages/MyJobs/MyJob";
 import AppliedJobs from "../pages/AppliedJobs/AppliedJobs";
 import Blogs from "../pages/Home/Blogs/Blogs";
+import UpdateJob from "../pages/UpdateJobs/UpdateJob";
 
 
 const router = createBrowserRouter([
@@ -60,7 +61,7 @@ const router = createBrowserRouter([
           element: <ProtectedRoute>
             <JobDetails/>
           </ProtectedRoute>,
-          loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`).then(res => res.json()),
+          loader: ({params}) => fetch(`https://server-ewpifyj7q-farhanshahriyar.vercel.app/jobs/${params.id}`).then(res => res.json()),
         },
         {
           path: "/add-jobs",
@@ -73,12 +74,12 @@ const router = createBrowserRouter([
         // {
         //   path: "/my-jobs",
         //   element: <MyJobs/>,
-        //   loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`).then(res => res.json()),
+        //   loader: ({params}) => fetch(`https://server-ewpifyj7q-farhanshahriyar.vercel.app/jobs/${params.id}`).then(res => res.json()),
         // },
         // {
         //   path: "/applied-jobs",
         //   element: <App/>,
-        //   // loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`).then(res => res.json()),
+        //   // loader: ({params}) => fetch(`https://server-ewpifyj7q-farhanshahriyar.vercel.app/jobs/${params.id}`).then(res => res.json()),
         // },
         {
           path: "/all-jobs",
@@ -97,6 +98,13 @@ const router = createBrowserRouter([
             <AppliedJobs/>
           </ProtectedRoute>,
           
+        },
+        {
+          path: "/update-jobs/:id",
+          element: <ProtectedRoute>
+            <UpdateJob/>
+          </ProtectedRoute>,
+          loader: ({params}) => fetch(`https://server-ewpifyj7q-farhanshahriyar.vercel.app/jobs/${params.id}`).then(res => res.json()),
         }
       ],
     },

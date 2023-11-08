@@ -8,7 +8,7 @@ const AppliedJobs = () => {
     // Fetching job data from the backend
     const fetchAppliedJobs = async () => {
       try {
-        const response = await fetch('http://localhost:5000/appliedjobs'); // Fetch data from the backend
+        const response = await fetch('https://server-ewpifyj7q-farhanshahriyar.vercel.app/appliedjobs'); // Fetch data from the backend
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
