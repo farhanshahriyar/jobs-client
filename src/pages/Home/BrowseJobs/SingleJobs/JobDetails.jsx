@@ -1,10 +1,74 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
-import { useLoaderData } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { useLoaderData, useNavigate } from 'react-router-dom'
+import { AuthContext } from '../../../../providers/AuthProvider';
+import Swal from 'sweetalert2';
 
 const JobDetails = () => {
     const job = useLoaderData()
+    const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
     console.log(job)
+
+    const appliedJobHandler = (e) => {
+      e.preventDefault();
+      // console.log("Job Applied e click porse mama"); //working
+      // get all data from the form
+      const form = e.target;
+      const name = form.name.value;
+      const email = form.email.value;
+      const rclink = form.rclink.value;
+
+      // passing info
+      const newAppliedJob = {
+          name,
+          email,
+          rclink,
+          cname: job.cname,
+          uname: job.uname,
+          category: job.category,
+          title: job.title,
+          salary: job.salary,
+          date: job.date
+          // applicationNumber: job.applicationNumber,
+      }
+      // console.log(newAppliedJob) //data passing successfully
+      fetch('http://localhost:5000/appliedjobs',{
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(newAppliedJob)
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log(data)
+        if(data.insertedId){
+            // alert('New Job added successfully')
+            // navigate('/')
+            Swal.fire({
+              title: 'Success!',
+              text: 'Job applied successfully',
+              icon: 'success',
+              confirmButtonText: 'Done'
+
+            })
+        } else {
+            // alert('Something went wrong')
+            Swal.fire({
+              title: 'Error!',
+              text: 'Do you want to continue',
+              icon: 'error',
+              confirmButtonText: 'Back'
+            })
+        }
+    })
+
+
+    // clear the form
+    form.reset()
+    }
+
   return (
 
     <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
@@ -80,8 +144,32 @@ const JobDetails = () => {
 
         <div className="mt-5">
 
-          <form>
+          <form onSubmit={appliedJobHandler}>
             <div className="grid gap-y-4">
+              <div>
+                <label className="block text-sm mb-2 dark:text-white">Name</label>
+                <div className="relative">
+                  <input type="text" id="text" name="name" readOnly disabled value={user.displayName} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" required/>
+                  <div className="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
+                    <svg className="h-5 w-5 text-red-500" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
+                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                    </svg>
+                  </div>
+                </div>
+                
+              </div>
+              <div>
+                <label className="block text-sm mb-2 dark:text-white">Email</label>
+                <div className="relative">
+                  <input type="text" id="text" name="email" readOnly disabled value={user.email} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" required/>
+                  <div className="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
+                    <svg className="h-5 w-5 text-red-500" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
+                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                    </svg>
+                  </div>
+                </div>
+                <p className="hidden text-xs text-red-600 mt-2">Please include a valid cv or  resume link address so we can get back to you</p>
+              </div>
               <div>
                 <label className="block text-sm mb-2 dark:text-white">Send Resume/CV Link</label>
                 <div className="relative">

@@ -10,6 +10,7 @@ const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    // const [appliedJobs, setAppliedJobs] = useState(JSON.parse(localStorage.getItem('appliedjobs') || '[]'))
 
       // register user functionalities
       const createUser = async (email, password) => {
@@ -23,13 +24,13 @@ const AuthProvider = ({children}) => {
         return signInWithEmailAndPassword(auth, email, password)
     }
 
-    // 
+    // google sign in functionalities
     const googleSignIn = async () => {
         setLoading(true)
         return signInWithPopup(auth, googleProvider)
     }
 
-    // 
+    // image manual update functionalities
     const updateUser = async (name, image) => {
         setLoading(true)
         return updateProfile(auth.currentUser,{
@@ -37,7 +38,6 @@ const AuthProvider = ({children}) => {
             photoURL: image
         })
     }
-
 
     // logout functionalities
     const logoutUser = async () => {
@@ -64,7 +64,9 @@ const AuthProvider = ({children}) => {
         loginUser,
         logoutUser,
         googleSignIn,
-        updateUser
+        updateUser,
+        // appliedJobs,
+        // setAppliedJobs
     }
 
   return (
