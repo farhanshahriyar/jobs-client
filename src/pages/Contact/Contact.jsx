@@ -23,7 +23,7 @@ const Contact = () => {
           details
         }
         // console.log(newContact) //data passing successfully
-        fetch('https://server-6pwgmkhex-farhanshahriyar.vercel.app/contacts',{
+        fetch('http://localhost:5000/contacts',{
           method: 'POST',
           headers: {
               'content-type': 'application/json'

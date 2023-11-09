@@ -33,7 +33,7 @@ const JobDetails = () => {
           // applicationNumber: job.applicationNumber,
       }
       // console.log(newAppliedJob) //data passing successfully
-      fetch('https://server-6pwgmkhex-farhanshahriyar.vercel.app/appliedjobs',{
+      fetch('http://localhost:5000/appliedjobs',{
         method: 'POST',
         headers: {
             'content-type': 'application/json'

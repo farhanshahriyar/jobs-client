@@ -61,7 +61,7 @@ const router = createBrowserRouter([
           element: <ProtectedRoute>
             <JobDetails/>
           </ProtectedRoute>,
-          loader: ({params}) => fetch(`https://server-6pwgmkhex-farhanshahriyar.vercel.app/jobs/${params.id}`).then(res => res.json()),
+          loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`).then(res => res.json()),
         },
         {
           path: "/add-jobs",
@@ -74,12 +74,12 @@ const router = createBrowserRouter([
         // {
         //   path: "/my-jobs",
         //   element: <MyJobs/>,
-        //   loader: ({params}) => fetch(`https://server-6pwgmkhex-farhanshahriyar.vercel.app/jobs/${params.id}`).then(res => res.json()),
+        //   loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`).then(res => res.json()),
         // },
         // {
         //   path: "/applied-jobs",
         //   element: <App/>,
-        //   // loader: ({params}) => fetch(`https://server-6pwgmkhex-farhanshahriyar.vercel.app/jobs/${params.id}`).then(res => res.json()),
+        //   // loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`).then(res => res.json()),
         // },
         {
           path: "/all-jobs",
@@ -104,7 +104,7 @@ const router = createBrowserRouter([
           element: <ProtectedRoute>
             <UpdateJob/>
           </ProtectedRoute>,
-          loader: ({params}) => fetch(`https://server-6pwgmkhex-farhanshahriyar.vercel.app/jobs/${params.id}`).then(res => res.json()),
+          loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`).then(res => res.json()),
         }
       ],
     },
