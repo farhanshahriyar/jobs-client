@@ -1,13 +1,15 @@
 /* eslint-disable no-unused-vars */
-import React, { useContext } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import { useLoaderData, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../../../providers/AuthProvider';
 import Swal from 'sweetalert2';
 
 const JobDetails = () => {
-    const job = useLoaderData()
+  const jobData = useLoaderData()
+  const [job, setJob] = useState(jobData);
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
+    const ref = useRef();
     console.log(job)
 
     const appliedJobHandler = (e) => {
@@ -29,7 +31,8 @@ const JobDetails = () => {
           category: job.category,
           title: job.title,
           salary: job.salary,
-          date: job.date
+          date: job.date,
+          jobId: job._id,
           // applicationNumber: job.applicationNumber,
       }
       // console.log(newAppliedJob) //data passing successfully
@@ -53,6 +56,8 @@ const JobDetails = () => {
               confirmButtonText: 'Done'
 
             })
+            setJob({...job, applicationNumber: job.applicationNumber + 1})
+            ref.current.click();
         } else {
             // alert('Something went wrong')
             Swal.fire({
@@ -122,13 +127,20 @@ const JobDetails = () => {
           Apply Now
         </button> */}
         <div className="text-center">
-          <button type="button" className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-overlay="#hs-modal-recover-account">
+          <button type="button" disabled={job.email==user.email || new Date() > new Date(job.date)} className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-overlay="#hs-modal-recover-account">
             Apply Now
           </button>
+          {
+            job.email==user.email && <p className='text-xs text-red-600 mt-2'>You can't apply to your own job</p>
+           
+          }
+          {
+            new Date() > new Date(job.date) && <p className='text-xs text-red-600 mt-2'>Deadline has passed</p>
+          }
         </div>
       </div>
       {/* modal */}
-      <div id="hs-modal-recover-account" className="hs-overlay hidden w-full h-full fixed top-0 start-0 z-[60] overflow-x-hidden overflow-y-auto">
+      <div id="hs-modal-recover-account" ref={ref} className="hs-overlay hidden w-full h-full fixed top-0 start-0 z-[60] overflow-x-hidden overflow-y-auto">
   <div className="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
     <div className="bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
       <div className="p-4 sm:p-7">

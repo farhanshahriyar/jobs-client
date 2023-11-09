@@ -1,33 +1,68 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../../providers/AuthProvider';
+import { usePDF } from 'react-to-pdf';
 
 const AppliedJobs = () => {
   const [appliedjobs, setAppliedJobs] = useState([]);
+  const { toPDF, targetRef } = usePDF({filename: 'appliedjobs.pdf'});
+  const [filteredJobs, setFilteredJobs] = useState([]);
+  const { user } = useContext(AuthContext);
+  const handleOnChange = (e) => {
+    if (e.target.value != 'all'){
+      const Jobs = filteredJobs.filter(job => job.category === e.target.value)
+      setAppliedJobs(Jobs)
+    }else {
+      setAppliedJobs([...filteredJobs])
+    }
+  }
 
   useEffect(() => {
     // Fetching job data from the backend
     const fetchAppliedJobs = async () => {
       try {
-        const response = await fetch('http://localhost:5000/appliedjobs'); // Fetch data from the backend
+        const response = await fetch(`http://localhost:5000/appliedjobs?email=${user?.email}`); // Fetch data from the backend
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
         setAppliedJobs(data);
+        setFilteredJobs(data)
       } catch (error) {
         console.error("Failed to fetch applied jobs:", error);
       }
     };
 
-    fetchAppliedJobs();
-  }, []);
+    if (user) {
+      fetchAppliedJobs();
+    }
+  }, [user]);
 
+  console.log(appliedjobs)
   return (
     <div className='mt-5 '>
       <h2 className="text-2xl font-semibold leading-tight text-center">
         You have applied to {appliedjobs.length} jobs
       </h2>
-      <div className="flex flex-col mt-5">
+
+    <div className='flex justify-end'>
+      <button onClick={() => toPDF()} 
+      className='py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+      >Download Summary</button>
+      </div>
+
+      <div className="flex justify-center mt-5">
+      <select onChange={handleOnChange}
+      className="py-3 px-4 pe-9 block max-w-[300px] bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-700 dark:border-transparent dark:text-gray-400 dark:focus:ring-gray-600">
+  <option selected value={'all'}>All Jobs</option>
+  <option>On-Site</option>
+  <option>Remote</option>
+  <option>Part-Time</option>
+  <option>Hybrid</option>
+</select>
+      </div>
+
+      <div className="flex flex-col mt-5" ref={targetRef}>
         <div className="-m-1.5 overflow-x-auto">
           <div className="p-1.5 min-w-full inline-block align-middle">
             <div className="overflow-hidden">
@@ -58,7 +93,10 @@ const AppliedJobs = () => {
                     
                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{job.email}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{job.date}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{job.rclink}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                      <a href={job.rclink} className='underline text-blue-500' target='_blank'>
+                        Resume Link
+                      </a></td>
                     </tr>
                   ))}
                 </tbody>

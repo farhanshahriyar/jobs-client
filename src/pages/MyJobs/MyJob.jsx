@@ -1,47 +1,14 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../../providers/AuthProvider';
 
 
 const MyJob = () => {
     const [myjobs, setMyJobs] = useState([]);
-
-  //   const handleDelete = async (jobId) => {
-  //     // swal with a confirmation before deleting the job
-  //     const confirmation = 
-  //     Swal.fire({
-  //         title: 'Are you sure?',
-  //         text: "You won't be able to revert this!",
-  //         icon: 'warning',
-  //         showCancelButton: true,
-  //         confirmButtonColor: '#6366F1',
-  //         cancelButtonColor: '#EF4444',
-  //         confirmButtonText: 'Yes, delete it!'
-  //     });
-
-  //     if (confirmation) {
-  //         try {
-  //             // const response = await fetch(`http://localhost:5000/jobs/${jobId}`, {
-  //             //     method: 'DELETE',
-  //             // });
-  //             const response = await fetch(`http://localhost:5000/jobs/${jobId}`, {
-  //               method: 'DELETE',
-  //             });
-  
-  //             if (!response.ok) {
-  //                 throw new Error(`Error: ${response.status}`);
-  //             }
-  
-  //             // Remove the job from the list in the frontend
-  //             setMyJobs(currentJobs => currentJobs.filter(job => job._id.toString() !== jobId));
-  
-  //             console.log('Job deleted successfully');
-  //         } catch (error) {
-  //             console.error("Failed to delete the job:", error);
-  //         }
-  //     }
-  // };
+    const { user } = useContext(AuthContext);
+ 
 
   const handleDelete = async (jobId) => {
     // Swal with a confirmation before deleting the job
@@ -83,24 +50,46 @@ const MyJob = () => {
   
   
       
-    // render all posted the jobs
-    useEffect(() => {
-        // Fetching job data from the backend
-        const fetchMyJobs = async () => {
-          try {
-            const response = await fetch('http://localhost:5000/jobs'); // Fetch data from the backend
-            if (!response.ok) {
-              throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const data = await response.json();
-            setMyJobs(data);
-          } catch (error) {
-            console.error("Failed to fetch applied jobs:", error);
-          }
-        };
+    // // render all posted the jobs
+    // useEffect(() => {
+    //     // Fetching job data from the backend
+    //     const fetchMyJobs = async () => {
+    //       try {
+    //         const response = await fetch('http://localhost:5000/jobs'); // Fetch data from the backend
+    //         if (!response.ok) {
+    //           throw new Error(`HTTP error! status: ${response.status}`);
+    //         }
+    //         const data = await response.json();
+    //         setMyJobs(data);
+    //       } catch (error) {
+    //         console.error("Failed to fetch applied jobs:", error);
+    //       }
+    //     };
     
-        fetchMyJobs();
-      }, []);
+    //     fetchMyJobs();
+    //   }, []);
+
+    useEffect(() => {
+      // This effect should depend on the user being logged in
+      if (user) {
+          const fetchMyJobs = async () => {
+              // Fetch only jobs associated with the logged-in user
+              try {
+                  // Replace 'userId' with the actual property that your backend uses
+                  const response = await fetch(`http://localhost:5000/jobs?email=${user?.email}`);
+                  if (!response.ok) {
+                      throw new Error(`HTTP error! status: ${response.status}`);
+                  }
+                  const data = await response.json();
+                  setMyJobs(data);
+              } catch (error) {
+                  console.error("Failed to fetch my jobs:", error);
+              }
+          };
+
+          fetchMyJobs();
+      }
+  }, [user]); 
 
 
     return (
