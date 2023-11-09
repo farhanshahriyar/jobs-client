@@ -61,7 +61,7 @@ const router = createBrowserRouter([
           element: <ProtectedRoute>
             <JobDetails/>
           </ProtectedRoute>,
-          loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`).then(res => res.json()),
+          loader: ({params}) => fetch(`https://jobs-backend-iota.vercel.app/jobs/${params.id}`).then(res => res.json()),
         },
         {
           path: "/add-jobs",
@@ -94,7 +94,7 @@ const router = createBrowserRouter([
           element: <ProtectedRoute>
             <UpdateJob/>
           </ProtectedRoute>,
-          loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`).then(res => res.json()),
+          loader: ({params}) => fetch(`https://jobs-backend-iota.vercel.app/jobs/${params.id}`).then(res => res.json()),
         }
       ],
     },

@@ -26,7 +26,7 @@ const MyJob = () => {
   
     if (confirmation.value) { // Check if user confirmed the deletion
       try {
-        const response = await fetch(`http://localhost:5000/jobs/${jobId}`, {
+        const response = await fetch(`https://jobs-backend-iota.vercel.app/jobs/${jobId}`, {
           method: 'DELETE',
         });
   
@@ -57,7 +57,7 @@ const MyJob = () => {
     //     // Fetching job data from the backend
     //     const fetchMyJobs = async () => {
     //       try {
-    //         const response = await fetch('http://localhost:5000/jobs'); // Fetch data from the backend
+    //         const response = await fetch('https://jobs-backend-iota.vercel.app/jobs'); // Fetch data from the backend
     //         if (!response.ok) {
     //           throw new Error(`HTTP error! status: ${response.status}`);
     //         }
@@ -78,7 +78,7 @@ const MyJob = () => {
               // Fetch only jobs associated with the logged-in user
               try {
                   // Replace 'userId' with the actual property that your backend uses
-                  const response = await fetch(`http://localhost:5000/jobs?email=${user?.email}`);
+                  const response = await fetch(`https://jobs-backend-iota.vercel.app/jobs?email=${user?.email}`);
                   if (!response.ok) {
                       throw new Error(`HTTP error! status: ${response.status}`);
                   }

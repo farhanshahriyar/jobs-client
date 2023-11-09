@@ -35,7 +35,7 @@ const UpdateJob = () => {
     };
 
     try {
-      const response = await fetch(`http://localhost:5000/jobs/${id}`, {
+      const response = await fetch(`https://jobs-backend-iota.vercel.app/jobs/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

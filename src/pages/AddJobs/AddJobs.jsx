@@ -43,7 +43,7 @@ const AddJobs = () => {
             applicationNumber: 0,
         }
         // console.log(newJob) //data passing successfully
-        fetch('http://localhost:5000/jobs',{
+        fetch('https://jobs-backend-iota.vercel.app/jobs',{
           method: 'POST',
           headers: {
               'content-type': 'application/json'

@@ -25,7 +25,7 @@ const Contact = () => {
           details
         }
         // console.log(newContact) //data passing successfully
-        fetch('http://localhost:5000/contacts',{
+        fetch('https://jobs-backend-iota.vercel.app/contacts',{
           method: 'POST',
           headers: {
               'content-type': 'application/json'

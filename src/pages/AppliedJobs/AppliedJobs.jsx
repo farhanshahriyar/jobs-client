@@ -23,7 +23,7 @@ const AppliedJobs = () => {
     // Fetching job data from the backend
     const fetchAppliedJobs = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/appliedjobs?email=${user?.email}`); // Fetch data from the backend
+        const response = await fetch(`https://jobs-backend-iota.vercel.app/appliedjobs?email=${user?.email}`); // Fetch data from the backend
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }

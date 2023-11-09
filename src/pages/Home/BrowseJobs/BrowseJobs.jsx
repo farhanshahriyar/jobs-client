@@ -26,7 +26,7 @@
 //   // // Function to fetch job data
 //   // const fetchJobs = async () => {
 //   //   try {
-//   //     const response = await fetch('http://localhost:5000/jobs/');
+//   //     const response = await fetch('https://jobs-backend-iota.vercel.app/jobs/');
 //   //     const data = await response.json();
 
 //   //     // Organize data into an object with keys for each tab
@@ -55,7 +55,7 @@
 //   // Function to fetch job data
 //   const fetchJobs = async () => {
 //     try {
-//       const response = await fetch('http://localhost:5000/jobs/');
+//       const response = await fetch('https://jobs-backend-iota.vercel.app/jobs/');
 //       const data = await response.json();
 //       // Organize data into an object with keys for each tab
 //       const organizedData = tabs.reduce((acc, tab) => {
@@ -174,7 +174,7 @@ const BrowseJobs = () => {
 
   const fetchJobs = async () => {
     try {
-      const response = await fetch('http://localhost:5000/jobs/');
+      const response = await fetch('https://jobs-backend-iota.vercel.app/jobs/');
       const data = await response.json();
       
       // Initialize a temporary object to hold filtered jobs
