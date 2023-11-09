@@ -1,39 +1,89 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 
 const MyJob = () => {
     const [myjobs, setMyJobs] = useState([]);
 
-    const handleDelete = async (jobId) => {
-      const confirmation = window.confirm("Are you sure you want to delete this job?");
-      if (confirmation) {
-          try {
-              // const response = await fetch(`http://localhost:5000/jobs/${jobId}`, {
-              //     method: 'DELETE',
-              // });
-              const response = await fetch(`http://localhost:5000/jobs/${jobId}`, {
-                method: 'DELETE',
-              });
+  //   const handleDelete = async (jobId) => {
+  //     // swal with a confirmation before deleting the job
+  //     const confirmation = 
+  //     Swal.fire({
+  //         title: 'Are you sure?',
+  //         text: "You won't be able to revert this!",
+  //         icon: 'warning',
+  //         showCancelButton: true,
+  //         confirmButtonColor: '#6366F1',
+  //         cancelButtonColor: '#EF4444',
+  //         confirmButtonText: 'Yes, delete it!'
+  //     });
+
+  //     if (confirmation) {
+  //         try {
+  //             // const response = await fetch(`http://localhost:5000/jobs/${jobId}`, {
+  //             //     method: 'DELETE',
+  //             // });
+  //             const response = await fetch(`http://localhost:5000/jobs/${jobId}`, {
+  //               method: 'DELETE',
+  //             });
   
-              if (!response.ok) {
-                  throw new Error(`Error: ${response.status}`);
-              }
+  //             if (!response.ok) {
+  //                 throw new Error(`Error: ${response.status}`);
+  //             }
   
-              // Remove the job from the list in the frontend
-              setMyJobs(currentJobs => currentJobs.filter(job => job._id.toString() !== jobId));
+  //             // Remove the job from the list in the frontend
+  //             setMyJobs(currentJobs => currentJobs.filter(job => job._id.toString() !== jobId));
   
-              console.log('Job deleted successfully');
-          } catch (error) {
-              console.error("Failed to delete the job:", error);
-          }
+  //             console.log('Job deleted successfully');
+  //         } catch (error) {
+  //             console.error("Failed to delete the job:", error);
+  //         }
+  //     }
+  // };
+
+  const handleDelete = async (jobId) => {
+    // Swal with a confirmation before deleting the job
+    const confirmation = await Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#6366F1',
+      cancelButtonColor: '#EF4444',
+      confirmButtonText: 'Yes, delete it!'
+    });
+  
+    if (confirmation.value) { // Check if user confirmed the deletion
+      try {
+        const response = await fetch(`http://localhost:5000/jobs/${jobId}`, {
+          method: 'DELETE',
+        });
+  
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
+        }
+  
+        // Remove the job from the list in the frontend
+        setMyJobs(currentJobs => currentJobs.filter(job => job._id.toString() !== jobId));
+  
+        console.log('Job deleted successfully');
+        // Optional: Show success message
+        Swal.fire('Deleted!', 'The job has been deleted.', 'success');
+      } catch (error) {
+        console.error("Failed to delete the job:", error);
+        // Optional: Show error message
+        Swal.fire('Error!', 'There was a problem deleting the job.', 'error');
       }
+    } else {
+      console.log('Job deletion was canceled.');
+    }
   };
   
+  
       
-    
-
+    // render all posted the jobs
     useEffect(() => {
         // Fetching job data from the backend
         const fetchMyJobs = async () => {
@@ -68,7 +118,7 @@ const MyJob = () => {
                     <th scope="col" className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Position</th>
                     <th scope="col" className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Salary</th>
                     <th scope="col" className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Category</th>
-                    <th scope="col" className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Date</th>
+                    <th scope="col" className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Application Dateline</th>
                     <th scope="col" className="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase">Delete Job</th>
                     <th scope="col" className="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase">Update Job</th>
                     </tr>
