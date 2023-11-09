@@ -69,8 +69,10 @@
 
 /* eslint-disable no-unused-vars */
 import React from 'react'
+import useTitle from '../../../hook/useTitle'
 
 const Blogs = () => {
+  useTitle('Blogs')
   return (
 
 <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">

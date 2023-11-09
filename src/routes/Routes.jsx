@@ -71,16 +71,6 @@ const router = createBrowserRouter([
               <AddJobs></AddJobs>
             </ProtectedRoute>
         },
-        // {
-        //   path: "/my-jobs",
-        //   element: <MyJobs/>,
-        //   loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`).then(res => res.json()),
-        // },
-        // {
-        //   path: "/applied-jobs",
-        //   element: <App/>,
-        //   // loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`).then(res => res.json()),
-        // },
         {
           path: "/all-jobs",
           element: <AllJobs/>,

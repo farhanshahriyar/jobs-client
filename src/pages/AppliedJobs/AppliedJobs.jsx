@@ -2,8 +2,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import { usePDF } from 'react-to-pdf';
+import useTitle from '../../hook/useTitle';
 
 const AppliedJobs = () => {
+  useTitle('Applied Jobs')
   const [appliedjobs, setAppliedJobs] = useState([]);
   const { toPDF, targetRef } = usePDF({filename: 'appliedjobs.pdf'});
   const [filteredJobs, setFilteredJobs] = useState([]);

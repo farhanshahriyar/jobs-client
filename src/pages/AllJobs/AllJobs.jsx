@@ -3,8 +3,10 @@ import React, { useState, useEffect } from 'react';
 import {  Link, useNavigate } from 'react-router-dom'; // assuming react-router is being used
 import Error from '../Error/Error';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
+import useTitle from '../../hook/useTitle';
 
 const AllJobs = () => {
+  useTitle('All Jobs')
   const [error, setError] = useState(false);
   const [jobs, setJobs] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');

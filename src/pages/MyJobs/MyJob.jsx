@@ -3,9 +3,11 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../providers/AuthProvider';
+import useTitle from '../../hook/useTitle';
 
 
 const MyJob = () => {
+  useTitle('My Jobs')
     const [myjobs, setMyJobs] = useState([]);
     const { user } = useContext(AuthContext);
  

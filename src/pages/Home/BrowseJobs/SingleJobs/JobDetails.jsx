@@ -3,8 +3,10 @@ import React, { useContext, useRef, useState } from 'react'
 import { useLoaderData, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../../../providers/AuthProvider';
 import Swal from 'sweetalert2';
+import useTitle from '../../../../hook/useTitle';
 
 const JobDetails = () => {
+  useTitle('Job Details')
   const jobData = useLoaderData()
   const [job, setJob] = useState(jobData);
     const { user } = useContext(AuthContext);

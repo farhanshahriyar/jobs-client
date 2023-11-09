@@ -1,8 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import Swal from 'sweetalert2';
+import useTitle from '../../hook/useTitle';
 
 const Contact = () => {
+  useTitle('Contact')
   const contactHandler = (e) => {
     e.preventDefault();
     // console.log("Contact e click porse mama");

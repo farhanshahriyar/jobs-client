@@ -1,7 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
+import useTitle from '../../hook/useTitle'
 
 const AboutUs = () => {
+  useTitle('About Us')
   return (
 <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
     <h2 className="mt-12 mb-10 font-bold text-3xl md:text-4xl lg:text-5xl text-gray-800 dark:text-gray-200 text-center">About Jobs</h2>

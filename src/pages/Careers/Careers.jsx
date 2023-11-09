@@ -1,8 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import NotAvailable from "../../assets/images/not-available.jpg"
+import useTitle from '../../hook/useTitle'
 
 const Careers = () => {
+  useTitle('Careers')
   return (
         <div className="min-h-screen bg-white flex items-center justify-center px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col md:flex-row items-center justify-between space-y-8 md:space-y-0 md:space-x-10 max-w-6xl mx-auto">

@@ -5,8 +5,10 @@ import Swal from 'sweetalert2';
 import { AuthContext } from '../../providers/AuthProvider';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import useTitle from '../../hook/useTitle';
 
 const UpdateJob = () => {
+  useTitle('Update Job')
   const updateJob = useLoaderData();
   const { id } = useParams(); // Get job ID from URL params
   const navigate = useNavigate();

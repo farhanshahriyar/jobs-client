@@ -4,8 +4,10 @@ import Swal from 'sweetalert2'
 import registerLogo from '../../assets/images/register.svg';
 import { AuthContext } from '../../providers/AuthProvider';
 import { useNavigate } from 'react-router-dom';
+import useTitle from '../../hook/useTitle';
 
 const Register = () => {
+  useTitle('Register')
   const [showPassword, setShowPassword] = useState(false);
   const [registerError, setRegisterError] = useState(''); 
   const navigate = useNavigate();
